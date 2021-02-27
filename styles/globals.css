@@ -14,3 +14,22 @@ a {
 * {
   box-sizing: border-box;
 }
+
+:root {
+  --primary: red;
+  --sencondary: red;
+
+  --white: white;
+  --black: black;
+
+  --warning: red;
+  --error: red;
+  --success: red;
+  --info: red;
+
+  --font-color-ligth: black;
+  --font-color-dark: red;
+
+  --background-light: red;
+  --background-dark: red;
+}
