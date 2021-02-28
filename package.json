@@ -20,7 +20,10 @@
     "standard": "16.0.3"
   },
   "lint-staged": {
-    "*": "standard --fix"
+    "*": [
+      "npm run lint:fix",
+      "git add"
+    ]
   },
   "husky": {
     "hooks": {
