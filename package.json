@@ -20,7 +20,7 @@
     "standard": "16.0.3"
   },
   "lint-staged": {
-    "*": "npm lint:fix"
+    "*": "standard --fix"
   },
   "husky": {
     "hooks": {
