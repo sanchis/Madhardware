@@ -1,7 +1,7 @@
 .search{
     display: block;
     font-size: 2rem;
-    width: 90vw;
+    width: 100%;
     border-radius: 20px;
     text-align: center;
 }

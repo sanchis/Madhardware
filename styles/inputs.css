@@ -1,0 +1,20 @@
+input{
+    font-family: inherit;
+    color: inherit;
+    font-size: inherit;
+    background-color: var(--background-color);
+    border: 2px solid var(--border-color);
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+    
+    transition: border-color 500ms ease-out, box-shadow 500ms ease-out;
+    -webkit-transition : border-color 500ms ease-out, box-shadow 500ms ease-out; 
+   -moz-transition : border-color 500ms ease-out, box-shadow 500ms ease-out;
+   -o-transition : border-color 500ms ease-out ,box-shadow 500ms ease-out; 
+  }
+  
+  input:focus{
+    border-color: var(--sencondary);
+    box-shadow: var(--border-color) 0px 0px 18px 1px;
+  }
