@@ -25,14 +25,8 @@
       "pre-commit": "lint-staged"
     }
   },
-  "standard": {
-    "ignore": [
-      "*.json",
-      "*.css"
-    ]
-  },
   "lint-staged": {
-    "*": [
+    "*.{js,jsx,html}": [
       "npm run lint:fix",
       "git add"
     ]
