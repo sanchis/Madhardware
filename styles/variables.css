@@ -1,0 +1,34 @@
+:root {
+    --primary: #ff5f3d;
+    --sencondary: #ffa42f;
+  
+    --white: white;
+    --black: black;
+  
+    --light: #ffffff;
+    --dark: #222222;
+  
+    --warning: red;
+    --error: red;
+    --success: red;
+    --info: red;
+  
+    --font-size: 18px;
+  
+    --border-color: #d5d5d5;
+    --font-color: var(--black);
+    --background-color: var(--white);
+  }
+  
+  
+  html[scheme='light-mode'] body {
+    --background-color: var(--white);
+    --font-color: var(--black);
+    --border-color: var(--light);
+  }
+  
+  html[scheme='dark-mode'] body {
+    --background-color: var(--dark);
+    --font-color: var(--light);
+    --border-color: var(--black);
+  }
