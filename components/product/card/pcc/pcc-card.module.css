@@ -1,0 +1,12 @@
+.productCard{
+    border-radius: 5px;
+    border: 2px solid var(--primary);
+    height: 50px;
+}
+
+.productLoading{
+    margin: auto;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
