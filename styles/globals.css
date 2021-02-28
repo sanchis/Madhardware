@@ -1,27 +1,49 @@
 :root {
-  --primary: red;
-  --sencondary: red;
+  --primary: #ff5f3d;
+  --sencondary: #ffa42f;
 
   --white: white;
   --black: black;
+
+  --light: #ffffff;
+  --dark: #222222;
 
   --warning: red;
   --error: red;
   --success: red;
   --info: red;
 
-  --font-color-ligth: black;
-  --font-color-dark: red;
+  --font-size: 18px;
 
-  --background-light: red;
-  --background-dark: red;
+  --border-color: #d5d5d5;
+  --font-color: var(--black);
+  --background-color: var(--white);
 }
+
+
+html[scheme='light-mode'] body {
+  --background-color: var(--white);
+  --font-color: var(--black);
+  --border-color: var(--light);
+}
+
+html[scheme='dark-mode'] body {
+  --background-color: var(--dark);
+  --font-color: var(--light);
+  --border-color: var(--black);
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  
+  color: var(--font-color);
+  background-color: var(--background-color);
+  font-size: var(--font-size);
+  height: 100vh;
 }
 
 a {
@@ -41,3 +63,28 @@ a {
   text-align: center;
 }
 
+input{
+  font-family: inherit;
+  color: inherit;
+  font-size: inherit;
+  background-color: var(--background-color);
+  border: 2px solid var(--border-color);
+  padding: 5px;
+  border-radius: 5px;
+  outline: none;
+  
+  transition: border 200ms ease-out;
+  -webkit-transition : border 200ms ease-out; 
+ -moz-transition : border 200ms ease-out;
+ -o-transition : border 200ms ease-out;
+
+  transition: box-shadow 200ms ease-out;
+  -webkit-transition : box-shadow 200ms ease-out; 
+ -moz-transition : box-shadow 200ms ease-out;
+ -o-transition : box-shadow 200ms ease-out;
+}
+
+input:focus{
+  border-color: var(--sencondary);
+  box-shadow: var(--border-color) 0px 0px 18px 1px;
+}

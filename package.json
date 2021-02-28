@@ -27,7 +27,8 @@
   },
   "standard": {
     "ignore": [
-      "*.json"
+      "*.json",
+      "*.css"
     ]
   },
   "lint-staged": {
