@@ -1,5 +1,6 @@
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+![TS-Standard - Typescript Standard Style Guide](https://badgen.net/badge/code%20style/ts-standard/blue?icon=typescript)
 [![CI](https://github.com/sanchis/Madhardware/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/sanchis/Madhardware/actions/workflows/main.yml)
+[![Dependabot badge](https://badgen.net/github/dependabot/standard/ts-standard?icon=dependabot)](https://dependabot.com/)
 <p align="center" >
   <img src="./public/logo-s.png" align="center" width="430" />
 </p>
