@@ -1,3 +1,4 @@
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 <p align="center" >
   <img src="./public/logo-s.png" align="center" width="430" />
 </p>
