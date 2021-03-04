@@ -4,7 +4,7 @@ import Image from 'next/image'
 interface LogoProps {
   width: string
   height: string
-  props: any
+  props?: any
 }
 
 export function Logo ({ width, height, ...props }: LogoProps): JSX.Element {
