@@ -4,7 +4,7 @@ import '../styles/globals.css'
 import '../styles/inputs.css'
 import '../styles/typography.css'
 
-export default function MyApp ({ Component, pageProps }) {
+export default function MyApp ({ Component, pageProps }): JSX.Element {
   return (
     <AppLayaout>
       <Component {...pageProps} />

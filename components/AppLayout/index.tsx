@@ -1,7 +1,7 @@
 import { Logo } from 'components/Logo'
 import styles from './app-layout.module.css'
 
-export function AppLayaout ({ children }) {
+export function AppLayaout ({ children }): JSX.Element {
   return (
     <>
       <div className={styles.container}>

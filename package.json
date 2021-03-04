@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "lint": "ts-standard",
-    "lint:fix": "ts-standard --fix",
+    "lint": "ts-standard -p ./tsconfig.json",
+    "lint:fix": "ts-standard -p ./tsconfig.json --fix",
     "start": "next start"
   },
   "dependencies": {
@@ -35,7 +35,10 @@
       "git add"
     ]
   },
-  "eslintConfig": {
-    "extends": "./node_modules/ts-standard/eslintrc.json"
+  "ts-standard": {
+    "project": "./tsconfig.json",
+    "ignore": [
+      "next-env.d.ts"
+    ]
   }
 }

@@ -3,7 +3,7 @@ import Loading from 'components/Loading'
 import React from 'react'
 import styles from './pcc-card.module.css'
 
-export function PccomponentesCard () {
+export function PccomponentesCard (): JSX.Element {
   return (
     <>
       <h2>Pccomponentes</h2>
