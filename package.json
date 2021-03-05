@@ -11,6 +11,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "axios": "0.21.1",
+    "cheerio": "^1.0.0-rc.5",
     "next": "10.0.7",
     "next-connect": "^0.10.0",
     "react": "17.0.1",

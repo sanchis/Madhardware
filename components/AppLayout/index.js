@@ -6,7 +6,7 @@ export function AppLayaout ({ children }) {
     <>
       <div className={styles.container}>
         <div className={`${styles.containerLogo} text-center`}>
-          <Logo width='250' height='210' className={styles.logo} />
+          <Logo width='250' height='210' />
         </div>
         <main>
           {children}
