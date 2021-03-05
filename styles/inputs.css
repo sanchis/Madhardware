@@ -8,10 +8,10 @@ input{
     border-radius: 5px;
     outline: none;
     
-    transition: border-color 500ms ease-out, box-shadow 500ms ease-out;
-    -webkit-transition : border-color 500ms ease-out, box-shadow 500ms ease-out; 
-   -moz-transition : border-color 500ms ease-out, box-shadow 500ms ease-out;
-   -o-transition : border-color 500ms ease-out ,box-shadow 500ms ease-out; 
+    transition: border-color 500ms cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 500ms cubic-bezier(0.22, 0.61, 0.36, 1);
+    -webkit-transition : border-color 500ms cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 500ms cubic-bezier(0.22, 0.61, 0.36, 1); 
+   -moz-transition : border-color 500ms cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 500ms cubic-bezier(0.22, 0.61, 0.36, 1);
+   -o-transition : border-color 500ms cubic-bezier(0.22, 0.61, 0.36, 1) ,box-shadow 500ms cubic-bezier(0.22, 0.61, 0.36, 1); 
   }
   
   input:focus{

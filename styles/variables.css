@@ -1,12 +1,12 @@
 :root {
-    --primary: #ff5f3d;
+    --primary: #FE5F00;
     --sencondary: #ffa42f;
   
     --white: white;
     --black: black;
   
     --light: #ffffff;
-    --dark: #222222;
+    --dark: #2D3142;
   
     --warning: red;
     --error: red;
@@ -16,10 +16,10 @@
     --font-size: 18px;
   
     --border-color: #d5d5d5;
-    --font-color: var(--black);
+    --font-color: var(--dark);
     --background-color: var(--white);
   }
-  
+  /* // https://coolors.co/2d3142-4f5d75-bfc0c0-ffffff-fe5f00 */
   
   html[scheme='light-mode'] body {
     --background-color: var(--white);
