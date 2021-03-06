@@ -4,6 +4,7 @@ export function ErrorHandler (err, req, res, next) {
   console.error('Body: ', req.body)
   console.trace()
 
+  console.error('ERROR', err)
   const responseError = {
     error: err.toString() || 'Unexpected error.'
   }
