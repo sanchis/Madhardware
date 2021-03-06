@@ -1,14 +1,20 @@
 .productCard{
     border-radius: 5px;
     border: 2px solid var(--primary);
-    height: 150px;
     display: grid;
-    grid-template-columns: 0.2fr 1fr 0.4fr ;
+    grid-template-columns: 0.2fr 1fr 0.2fr ;
     gap: 10px;
+    padding: 10px;
+    height: 200px;
 }
 
-.productCard .image{
-    overflow: hidden;
+@media screen and (max-width: 800px) {
+    .productCard{
+        height: 600px;
+        grid-template-columns: 100%;
+        grid-template-rows: 0.8fr 1fr 0.4fr;
+        justify-content: center;
+    }
 }
 
 .productCard .content{
@@ -18,16 +24,17 @@
 
 .productCard .content .body{
     overflow: hidden;
-    height: calc(100% - 30%);
 }
 
 .productCard .title{
     margin:5px 0px;
 }
 
-.productCard .image img{
-    width: 100%;
-    height: auto;
+.productCard img{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    margin: auto;
 }
 
 .productCard .price{

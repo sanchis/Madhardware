@@ -6,10 +6,7 @@ export function PccomponentesCard ({ product }) {
   return (
     <>
       <div className={styles.productCard}>
-
-        <div className={styles.image}>
-          <img src={product.image} />
-        </div>
+        <img src={product.image} />
         <div className={styles.content}>
           <h3 className={styles.title}>{product.name}</h3>
           <p className={styles.body}>
