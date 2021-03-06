@@ -1,6 +1,35 @@
 .productCard{
     border-radius: 5px;
     border: 2px solid var(--primary);
-    height: 50px;
+    height: 150px;
+    display: grid;
+    grid-template-columns: 0.2fr 1fr 0.4fr ;
+    gap: 10px;
 }
 
+.productCard .image{
+    overflow: hidden;
+}
+
+.productCard .content{
+    overflow: hidden;
+    height: 100%;
+}
+
+.productCard .content .body{
+    overflow: hidden;
+    height: calc(100% - 30%);
+}
+
+.productCard .title{
+    margin:5px 0px;
+}
+
+.productCard .image img{
+    width: 100%;
+    height: auto;
+}
+
+.productCard .price{
+    text-align: center;
+}

@@ -38,11 +38,13 @@ function populateData (html) {
     const url = page('link[rel="canonical"]').attr('href')
     const image = page('.image_url').text()
     const price = page('.unit_price').text()
+    const description = page('#ficha-producto-caracteristicas').text()
 
     return {
       price: Number(price),
       name: name,
       url: url,
+      description,
       image: image
     }
   } catch (error) {
