@@ -32,14 +32,18 @@ function findByUrl (url) {
 function populateData (html) {
   try {
     const page = cheerio.load(html)
-    const product = JSON.parse(page('#microdata-product-script').html())
+
+    const product = page('#add-cart')
+    const name = product.attr('data-name')
+    const url = page('link[rel="canonical"]').attr('href')
+    const image = page('.image_url').text()
     const price = page('.unit_price').text()
 
     return {
       price: Number(price),
-      name: product.name,
-      url: product.url,
-      image: `https:${product.image}`
+      name: name,
+      url: url,
+      image: image
     }
   } catch (error) {
     console.error(error)
