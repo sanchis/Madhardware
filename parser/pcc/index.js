@@ -9,25 +9,44 @@ export function searchProduct (text) {
   return axios.post(SEARCH_URL(text))
     .then(res => res.data)
     .then(data => cheerio.load(data))
-    .then(dom => dom('.GTM-productClick')[0].attribs.href)
+    .then(dom => {
+      const links = dom('.GTM-productClick')
+      if (links?.length > 0) {
+        return dom('.GTM-productClick')[0].attribs.href
+      }
+      productNotFound()
+    })
     .then(findByUrl)
 }
 
 function findByUrl (url) {
+  if (!url || url === '') {
+    return productNotFound()
+  }
+
   return axios.get(`${baseUrl}${url}`)
     .then(res => res.data)
     .then(populateData)
 }
 
 function populateData (html) {
-  const page = cheerio.load(html)
-  const product = JSON.parse(page('#microdata-product-script').html())
-  const price = page('.unit_price').text()
+  try {
+    const page = cheerio.load(html)
+    const product = JSON.parse(page('#microdata-product-script').html())
+    const price = page('.unit_price').text()
 
-  return {
-    price: Number(price),
-    name: product.name,
-    url: product.url,
-    image: `https:${product.image}`
+    return {
+      price: Number(price),
+      name: product.name,
+      url: product.url,
+      image: `https:${product.image}`
+    }
+  } catch (error) {
+    console.error(error)
+    return productNotFound()
   }
 }
+
+function productNotFound () {
+  throw new Error('Producto no encontrado')
+};
