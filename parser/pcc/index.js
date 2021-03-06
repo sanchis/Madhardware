@@ -5,7 +5,6 @@ const baseUrl = 'https://www.pccomponentes.com'
 const SEARCH_URL = (text) => `${baseUrl}/buscar/ajax?query=${text}&page=0`
 
 export function searchProduct (text) {
-  // TODO control the first element exist
   return axios.post(SEARCH_URL(text))
     .then(res => res.data)
     .then(data => cheerio.load(data))

@@ -5,8 +5,8 @@ import { searchPcc } from 'services/parser.service'
 export default function SearchResult ({ pcc }) {
   return (
     <>
-      <h2>Search result</h2>
-      {pcc ? <PccomponentesCard product={pcc} /> : <p>Prodducto no encontrado</p>}
+      <h2>Pccomponentes</h2>
+      {pcc ? <PccomponentesCard product={pcc} /> : <p>Producto no encontrado</p>}
     </>
   )
 }
