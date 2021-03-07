@@ -2,7 +2,7 @@
     border-radius: 5px;
     border: 2px solid var(--primary);
     display: grid;
-    grid-template-columns: 0.2fr 1fr 0.2fr ;
+    grid-template-columns: 0.2fr 1fr 0.3fr ;
     gap: 10px;
     padding: 10px;
     height: 200px;
@@ -30,13 +30,16 @@
     margin:5px 0px;
 }
 
-.productCard img{
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover;
+.productCard .img{
     margin: auto;
 }
 
 .productCard .price{
     text-align: center;
+}
+
+.productCard .price .url{
+    background-color: var(--primary);
+    padding: 10px;
+    color: var(--white);
 }
