@@ -1,31 +1,59 @@
 import axios from 'axios'
-import { useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import Router from 'next/router'
 
 export default function useLoading () {
   const [loading, setLoading] = useState(0)
 
-  function incrementLoading () {
-    setLoading(state => state + 1)
-  }
+  console.log('hola')
 
-  function decrementLoading () {
-    setLoading(state => state > 0 ? state - 1 : 0)
-  }
+  const inc = useCallback(() => setLoading(counter => counter + 1), [setLoading]) // add to counter
+  const dec = useCallback(() => setLoading(counter => counter > 0 ? counter - 1 : counter), [setLoading]) // remove from counter
 
-  axios.interceptors.request.use((req) => {
-    incrementLoading()
-    return req
-  })
-  axios.interceptors.response.use(
-    (res) => {
-      decrementLoading()
-      return res
+  const interceptors = useMemo(() => ({
+    request: config => {
+      inc()
+      return config
     },
-    (err) => {
-      decrementLoading()
-      return err
+    response: response => {
+      dec()
+      return response
+    },
+    error: error => {
+      dec()
+      return error
     }
-  )
+  }), [inc, dec]) // create the interceptors
+
+  useEffect(() => {
+    console.log('use effects interceptor')
+    // add request interceptors
+    const reqInterceptor = axios.interceptors.request.use(interceptors.request, interceptors.error)
+    // add response interceptors
+    const resInterceptor = axios.interceptors.response.use(interceptors.response, interceptors.error)
+    return () => {
+      // remove all intercepts when done
+      axios.interceptors.request.eject(reqInterceptor)
+      axios.interceptors.response.eject(resInterceptor)
+    }
+  }, [interceptors])
+
+  useEffect(() => {
+    console.log('use effects router')
+
+    const incrementByRouter = () => inc()
+    const decrementByRouter = () => dec()
+
+    Router.events.on('routeChangeStart', () => incrementByRouter)
+    Router.events.on('routeChangeComplete', () => decrementByRouter)
+    Router.events.on('routeChangeError', () => decrementByRouter)
+
+    return () => {
+      Router.events.off('routeChangeStart', () => incrementByRouter)
+      Router.events.off('routeChangeComplete', () => decrementByRouter)
+      Router.events.off('routeChangeError', () => decrementByRouter)
+    }
+  }, [])
 
   return [loading, setLoading]
 }
