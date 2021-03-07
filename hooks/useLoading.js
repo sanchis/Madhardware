@@ -39,9 +39,9 @@ export default function useLoading () {
     const incrementByRouter = () => inc()
     const decrementByRouter = () => dec()
 
-    Router.events.on('routeChangeStart', () => incrementByRouter)
-    Router.events.on('routeChangeComplete', () => decrementByRouter)
-    Router.events.on('routeChangeError', () => decrementByRouter)
+    Router.events.on('routeChangeStart', () => incrementByRouter())
+    Router.events.on('routeChangeComplete', () => decrementByRouter())
+    Router.events.on('routeChangeError', () => decrementByRouter())
 
     return () => {
       Router.events.off('routeChangeStart', () => incrementByRouter)
