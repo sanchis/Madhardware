@@ -5,8 +5,6 @@ import Router from 'next/router'
 export default function useLoading () {
   const [loading, setLoading] = useState(0)
 
-  console.log('hola')
-
   const inc = useCallback(() => setLoading(counter => counter + 1), [setLoading]) // add to counter
   const dec = useCallback(() => setLoading(counter => counter > 0 ? counter - 1 : counter), [setLoading]) // remove from counter
 
@@ -26,7 +24,6 @@ export default function useLoading () {
   }), [inc, dec]) // create the interceptors
 
   useEffect(() => {
-    console.log('use effects interceptor')
     // add request interceptors
     const reqInterceptor = axios.interceptors.request.use(interceptors.request, interceptors.error)
     // add response interceptors
@@ -39,8 +36,6 @@ export default function useLoading () {
   }, [interceptors])
 
   useEffect(() => {
-    console.log('use effects router')
-
     const incrementByRouter = () => inc()
     const decrementByRouter = () => dec()
 
