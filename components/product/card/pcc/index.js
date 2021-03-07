@@ -14,7 +14,7 @@ export function PccomponentesCard ({ product }) {
           <h3 className={styles.title}>{product.name}</h3>
           <p className={styles.body}>
             {product.description}
-            {/* TODO create acordion */}
+            {/* TODO create acordion  */}
           </p>
         </div>
         <div className={styles.price}>
