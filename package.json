@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "lint": "standard",
-    "lint:fix": "standard --fix",
+    "lint": "ts-standard -p ./tsconfig.json",
+    "lint:fix": "ts-standard -p ./tsconfig.json --fix",
     "start": "next start"
   },
   "dependencies": {
@@ -17,22 +17,15 @@
     "react-dom": "17.0.1"
   },
   "devDependencies": {
-    "husky": "4.3.8",
-    "lint-staged": "10.5.4",
-    "standard": "16.0.3"
+    "@types/node": "^14.14.31",
+    "@types/react": "^17.0.2",
+    "ts-standard": "^10.0.0",
+    "typescript": "^4.2.2"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx,html}": [
-      "npm run lint:fix",
-      "git add"
+  "ts-standard": {
+    "project": "./tsconfig.json",
+    "ignore": [
+      "next-env.d.ts"
     ]
-  },
-  "eslintConfig": {
-    "extends": "./node_modules/standard/eslintrc.json"
   }
 }
