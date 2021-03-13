@@ -1,12 +1,15 @@
+import { Heading, SimpleGrid } from '@chakra-ui/react'
 import { PccomponentesCard } from 'components/product/card/pcc'
 import { searchPcc } from 'services/parser.service'
 
 export default function SearchResult ({ pcc }) {
   return (
-    <>
-      <h2>Pccomponentes</h2>
-      {pcc ? <PccomponentesCard product={pcc} /> : <p>Producto no encontrado</p>}
-    </>
+    <SimpleGrid columns={[1, 2, 3]} gap='10'>
+      <div>
+        <Heading mb='5'>Pccomponentes</Heading>
+        {pcc ? <PccomponentesCard product={pcc} /> : <p>Producto no encontrado</p>}
+      </div>
+    </SimpleGrid>
   )
 }
 

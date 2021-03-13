@@ -1,19 +1,16 @@
 import { Logo } from 'components/Logo'
-import styles from './app-layout.module.css'
+import { Center, Container } from '@chakra-ui/react'
 
 export function AppLayaout ({ children }) {
   return (
-    <>
-      <div className={styles.container}>
-        <div className={`${styles.containerLogo} text-center`}>
-          <Logo width='250' height='210' />
-        </div>
-        <main>
-          {children}
-        </main>
-      </div>
-
+    <Container maxW='container.xl' w='container.xl'>
+      <Center mt={10} mb={10}>
+        <Logo width='250' height='210' />
+      </Center>
+      <main>
+        {children}
+      </main>
       <footer />
-    </>
+    </Container>
   )
 }
