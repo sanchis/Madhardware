@@ -2,10 +2,16 @@ import axios from 'axios'
 import cheerio from 'cheerio'
 
 const baseUrl = 'https://www.pccomponentes.com'
+const fakeUAgent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 12_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0 Mobile/15E148 Safari/604.1'
+const configAxios = {
+  headers: {
+    'User-Agent': fakeUAgent
+  }
+}
 const SEARCH_URL = (text) => `${baseUrl}/buscar/ajax?query=${text}&page=0`
 
 export function searchProduct (text) {
-  return axios.post(SEARCH_URL(text))
+  return axios.post(SEARCH_URL(text), undefined, configAxios)
     .then(res => res.data)
     .then(data => cheerio.load(data))
     .then(dom => {
@@ -23,7 +29,7 @@ function findByUrl (url) {
     return productNotFound()
   }
 
-  return axios.get(`${baseUrl}${url}`)
+  return axios.get(`${baseUrl}${url}`, configAxios)
     .then(res => res.data)
     .then(populateData)
 }
