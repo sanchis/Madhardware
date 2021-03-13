@@ -1,4 +1,3 @@
-import React from 'react'
 import { PccomponentesCard } from 'components/product/card/pcc'
 import { searchPcc } from 'services/parser.service'
 

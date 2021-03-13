@@ -1,5 +1,4 @@
 
-import React from 'react'
 import styles from './pcc-card.module.css'
 import Image from 'next/image'
 

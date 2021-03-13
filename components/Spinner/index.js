@@ -1,6 +1,4 @@
 import styles from './spinner.module.css'
-
-import React from 'react'
 import useLoading from 'hooks/useLoading'
 
 export default function Spinner () {
