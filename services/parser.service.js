@@ -5,5 +5,5 @@ export function searchPcc (text) {
     .then(res =>
       res.data || null // In case statusCode !== 200 data is undefined
     )
-    .catch(null)
+    .catch(() => null)
 }
