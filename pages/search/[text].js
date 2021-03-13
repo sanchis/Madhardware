@@ -6,7 +6,7 @@ export default function SearchResult ({ pcc }) {
   return (
     <SimpleGrid columns={[1, 2, 3]} gap='10'>
       <div>
-        <Heading mb='5'>Pccomponentes</Heading>
+        <Heading textAlign='center' mb='5'>Pccomponentes</Heading>
         {pcc ? <PccomponentesCard product={pcc} /> : <p>Producto no encontrado</p>}
       </div>
     </SimpleGrid>
