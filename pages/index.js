@@ -21,6 +21,7 @@ export default function Home () {
         <Input
           type='text'
           lg='lg' name='keyword'
+          textAlign='center'
           placeholder='Introduce el nombre del producto'
           required onChange={(event) => setKeyword(event.target.value)}
           value={keyword}

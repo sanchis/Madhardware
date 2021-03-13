@@ -2,6 +2,7 @@ import { AppLayaout } from 'components/AppLayout'
 import Spinner from 'components/Spinner'
 import '../styles/globals.css'
 import axios from 'axios'
+import theme from '../styles/theme'
 
 import { ChakraProvider } from '@chakra-ui/react'
 
@@ -10,7 +11,7 @@ axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? `https://${proc
 /** */
 export default function MyApp ({ Component, pageProps }) {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <AppLayaout>
         <Spinner />
         <Component {...pageProps} />
