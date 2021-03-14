@@ -9,7 +9,7 @@ export default function Home () {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    router.push(`search/${keyword}`)
+    router.push(`search/${encodeURIComponent(keyword)}`)
   }
   return (
     <>
