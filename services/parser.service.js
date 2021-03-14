@@ -1,7 +1,16 @@
 import axios from 'axios'
 
 export function searchPcc (text) {
-  return axios.get(`/api/parser/pcc/${text}`)
+  return searchParser(`/api/parser/pcc/${encodeURIComponent(text)}`)
+}
+
+export function searchCoolmod (text) {
+  return searchParser(`/api/parser/coolmod/${encodeURIComponent(text)}`)
+}
+
+function searchParser (url) {
+  console.log('url', url)
+  return axios.get(url)
     .then(res =>
       res.data || null // In case statusCode !== 200 data is undefined
     )
