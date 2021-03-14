@@ -3,7 +3,7 @@ import { Box, Center, Heading, Image, Text } from '@chakra-ui/react'
 
 export function PccomponentesCard ({ product }) {
   return (
-    <Box borderWidth='1px' borderColor='orange.400' backgroundColor='white' color='gray.900' borderRadius='lg' overflow='hidden'>
+    <Box borderWidth='1px' borderColor='orange.400' borderRadius='lg' overflow='hidden'>
       <Center>
         <Image src={product.image} alt={product.name} />
       </Center>
