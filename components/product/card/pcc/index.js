@@ -1,27 +1,24 @@
 
-import React from 'react'
-import styles from './pcc-card.module.css'
-import Image from 'next/image'
+import { Box, Center, Heading, Image, Text } from '@chakra-ui/react'
 
 export function PccomponentesCard ({ product }) {
   return (
-    <>
-      <div className={styles.productCard}>
-        <div className={styles.img}>
-          <Image width='300' height='300' src={product.image} />
-        </div>
-        <div className={styles.content}>
-          <h3 className={styles.title}>{product.name}</h3>
-          <p className={styles.body}>
+    <Box borderWidth='1px' borderColor='orange.400' borderRadius='lg' overflow='hidden'>
+      <Center>
+        <Image src={product.image} alt={product.name} />
+      </Center>
+
+      <Box p='6'>
+        <Heading align='center' size='lg'>{product.name}</Heading>
+
+        <Box mt='5'>
+          <Text noOfLines={5}>
             {product.description}
-            {/* TODO create acordion  */}
-          </p>
-        </div>
-        <div className={styles.price}>
-          <h1>{product.price} €</h1>
-          <a className={styles.url} href={product.url} target='_blank' rel='noopener noreferrer'>Ver producto</a>
-        </div>
-      </div>
-    </>
+          </Text>
+        </Box>
+
+        <Heading mt='5' align='center' size='lg'>{product.price} €</Heading>
+      </Box>
+    </Box>
   )
 }

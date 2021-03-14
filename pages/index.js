@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Head from 'next/head'
-import styles from 'styles/index.module.css'
 import { useRouter } from 'next/router'
+import { Input } from '@chakra-ui/react'
 
 export default function Home () {
   const router = useRouter()
@@ -18,7 +18,14 @@ export default function Home () {
       </Head>
       <form onSubmit={handleSubmit}>
 
-        <input type='text' className={`margin-auto ${styles.search}`} name='keyword' placeholder='Introduce tu producto' required onChange={(event) => setKeyword(event.target.value)} value={keyword} />
+        <Input
+          type='text'
+          lg='lg' name='keyword'
+          textAlign='center'
+          placeholder='Introduce el nombre del producto'
+          required onChange={(event) => setKeyword(event.target.value)}
+          value={keyword}
+        />
       </form>
     </>
   )
