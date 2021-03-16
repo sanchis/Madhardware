@@ -9,7 +9,6 @@ export function searchCoolmod (text) {
 }
 
 function searchParser (url) {
-  console.log('url', url)
   return axios.get(url)
     .then(res =>
       res.data || null // In case statusCode !== 200 data is undefined

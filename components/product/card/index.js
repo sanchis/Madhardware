@@ -9,7 +9,7 @@ export default function ProductCard ({ product, shopColor }) {
       </Center>
 
       <Box p='6'>
-        <Heading align='center' size='lg'>{product.name}</Heading>
+        <Heading align='center' size='lg' noOfLines={3}>{product.name}</Heading>
 
         <Box mt='5'>
           <Text noOfLines={5}>
