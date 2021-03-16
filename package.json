@@ -5,6 +5,7 @@
   "repository": "https://github.com/sanchis/madhardware",
   "scripts": {
     "dev": "next dev",
+    "debug": "cross-env NODE_OPTIONS='--inspect' npm run dev",
     "build": "next build",
     "lint": "standard",
     "lint:fix": "standard --fix",
@@ -23,6 +24,7 @@
     "react-dom": "17.0.1"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "husky": "4.3.8",
     "lint-staged": "10.5.4",
     "standard": "16.0.3"
