@@ -8,6 +8,10 @@ export function searchCoolmod (text) {
   return searchParser(`/api/parser/coolmod/${encodeURIComponent(text)}`)
 }
 
+export function searchXtremmedia (text) {
+  return searchParser(`/api/parser/xtremmedia/${encodeURIComponent(text)}`)
+}
+
 function searchParser (url) {
   return axios.get(url)
     .then(res =>
