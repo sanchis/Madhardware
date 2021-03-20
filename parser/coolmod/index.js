@@ -52,7 +52,7 @@ async function populateData (html, url) {
   try {
     const page = cheerio.load(html)
 
-    const productId = page('[name="virtuemart_product_id[1]"]').attr('value')
+    const productId = page('[name="virtuemart_product_id"]').attr('value')
     const price = page('#fixed-footer-price').text()
       .replace('€', '')
     const name = page('title').text()
