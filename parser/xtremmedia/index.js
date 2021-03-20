@@ -2,11 +2,11 @@ import axios from 'axios'
 import cheerio from 'cheerio'
 import { ConfigAxios, ProductNotFound } from '../config'
 
-const baseUrl = 'https://xtremmedia.com'
-const SEARCH_URL = (text) => `${baseUrl}/?s=product/search/...%20introduce%20palabras%20para%20buscar%20en%20T%C3%ADtulos&term=${text}`
+const BASE_URL = 'https://xtremmedia.com'
+const SEARCH_URL = (text) => `${BASE_URL}/?s=product/search/...%20introduce%20palabras%20para%20buscar%20en%20T%C3%ADtulos&term=${text}`
 
 export function searchProduct (text) {
-  return axios.get(SEARCH_URL(text), undefined, ConfigAxios)
+  return axios.get(SEARCH_URL(text), ConfigAxios)
     .then(res => res.data)
     .then(data => {
       if (data?.length > 0) {

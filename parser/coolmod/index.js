@@ -2,8 +2,8 @@ import axios from 'axios'
 import { ConfigAxios, ProductNotFound } from '../config'
 import cheerio from 'cheerio'
 
-const baseUrl = 'https://www.coolmod.com'
-const SEARCH_URL = `${baseUrl}/web/search/bar`
+const BASE_URL = 'https://www.coolmod.com'
+const SEARCH_URL = `${BASE_URL}/web/search/bar`
 
 export function searchProduct (text) {
   return axios.post(SEARCH_URL, `search=${text}`, ConfigAxios)
@@ -24,9 +24,9 @@ function findByUrl (url) {
     return ProductNotFound()
   }
 
-  return axios.get(`${baseUrl}${url}`, ConfigAxios)
+  return axios.get(`${BASE_URL}${url}`, ConfigAxios)
     .then(res => res.data)
-    .then(data => populateData(data, baseUrl + url))
+    .then(data => populateData(data, BASE_URL + url))
 }
 
 function getDescription (idProduct) {
@@ -36,7 +36,7 @@ function getDescription (idProduct) {
       'X-Requested-With': 'XMLHttpRequest'
     }
   }
-  return axios.post(`${baseUrl}/web/vista-productos/getDescription`, `id=${idProduct}&is_responsive=`, newConfig)
+  return axios.post(`${BASE_URL}/web/vista-productos/getDescription`, `id=${idProduct}&is_responsive=`, newConfig)
     .then(res => res.data || '')
     .then(res => {
       if (res !== '') {
