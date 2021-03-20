@@ -37,7 +37,7 @@ function populateData (html) {
     const name = product.attr('data-name')
     const url = page('link[rel="canonical"]').attr('href')
     const image = page('.image_url').text()
-    const price = page('.js-marketplace-addCar').attr('data-price')
+    const price = product.attr('data-price')
     const description = page('#ficha-producto-caracteristicas').text()
 
     return {

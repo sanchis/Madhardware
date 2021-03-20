@@ -1,8 +1,8 @@
 import { Heading, SimpleGrid } from '@chakra-ui/react'
 import ProductColor from 'components/product/card'
-import { searchCoolmod, searchPcc } from 'services/parser.service'
+import { searchCoolmod, searchPcc, searchXtremmedia } from 'services/parser.service'
 
-export default function SearchResult ({ pcc, coolmod }) {
+export default function SearchResult ({ pcc, coolmod, xtremmedia }) {
   const notFound = () => <Heading textAlign='center' fontWeight='thin' fontSize='1xl'>Producto no encontrado 😔</Heading>
 
   return (
@@ -14,6 +14,10 @@ export default function SearchResult ({ pcc, coolmod }) {
       <div>
         <Heading textAlign='center' mb='5'>Coolmod</Heading>
         {coolmod ? <ProductColor product={coolmod} shopColor='#333' /> : notFound()}
+      </div>
+      <div>
+        <Heading textAlign='center' mb='5'>Xtremmedia</Heading>
+        {xtremmedia ? <ProductColor product={xtremmedia} shopColor='#dfe42f' /> : notFound()}
       </div>
     </SimpleGrid>
   )
@@ -32,7 +36,9 @@ export async function getServerSideProps ({ query }) {
   return {
     props: {
       pcc: await searchPcc(text),
-      coolmod: await searchCoolmod(text)
+      coolmod: await searchCoolmod(text),
+      xtremmedia: await searchXtremmedia(text)
+
     }
   }
 }
