@@ -12,6 +12,10 @@ export function searchXtremmedia (text) {
   return searchParser(`/api/parser/xtremmedia/${encodeURIComponent(text)}`)
 }
 
+export function searchAlternate (text) {
+  return searchParser(`/api/parser/alternate/${encodeURIComponent(text)}`)
+}
+
 function searchParser (url) {
   return axios.get(url)
     .then(res =>

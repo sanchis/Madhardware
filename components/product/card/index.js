@@ -1,5 +1,5 @@
 
-import { Box, Center, Heading, Image, Text } from '@chakra-ui/react'
+import { Box, Center, Heading, Image, Text, Tooltip } from '@chakra-ui/react'
 
 export default function ProductCard ({ product, shopColor }) {
   return (
@@ -9,8 +9,9 @@ export default function ProductCard ({ product, shopColor }) {
       </Center>
 
       <Box p='6'>
-        <Heading align='center' size='lg' noOfLines={3}>{product.name}</Heading>
-
+        <Tooltip label={product.name}>
+          <Heading align='center' size='lg' noOfLines={3}>{product.name}</Heading>
+        </Tooltip>
         <Box mt='5'>
           <Text noOfLines={5}>
             {product.description}

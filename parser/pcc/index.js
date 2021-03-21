@@ -2,8 +2,8 @@ import axios from 'axios'
 import cheerio from 'cheerio'
 import { ConfigAxios, ProductNotFound } from '../config'
 
-const baseUrl = 'https://www.pccomponentes.com'
-const SEARCH_URL = (text) => `${baseUrl}/buscar/ajax?query=${text}&page=0`
+const BASE_URL = 'https://www.pccomponentes.com'
+const SEARCH_URL = (text) => `${BASE_URL}/buscar/ajax?query=${text}&page=0`
 
 export function searchProduct (text) {
   return axios.post(SEARCH_URL(text), undefined, ConfigAxios)
@@ -24,7 +24,7 @@ function findByUrl (url) {
     return ProductNotFound()
   }
 
-  return axios.get(`${baseUrl}${url}`, ConfigAxios)
+  return axios.get(`${BASE_URL}${url}`, ConfigAxios)
     .then(res => res.data)
     .then(populateData)
 }
