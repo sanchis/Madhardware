@@ -19,12 +19,12 @@
     "cheerio": "1.0.0-rc.5",
     "framer-motion": "3.10.3",
     "next": "10.0.7",
-    "next-connect": "^0.10.0",
+    "next-connect": "0.10.0",
     "react": "17.0.1",
     "react-dom": "17.0.1"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3",
+    "cross-env": "7.0.3",
     "husky": "4.3.8",
     "lint-staged": "10.5.4",
     "standard": "16.0.3"
