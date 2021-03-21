@@ -1,6 +1,6 @@
 import { Heading } from '@chakra-ui/layout'
 import { useState, useEffect } from 'react'
-import ProductCard from 'components/Product/card'
+import ProductCard from '../Product/card'
 
 function ProductNotFoundView () {
   <Heading textAlign='center' fontWeight='thin' fontSize='1xl'>Producto no encontrado 😔</Heading>
