@@ -1,9 +1,7 @@
 import styles from './spinner.module.css'
-import useLoading from 'hooks/useLoading'
 import { useColorModeValue } from '@chakra-ui/react'
 
-export default function Spinner () {
-  const [loading] = useLoading()
+export default function Spinner ({ loading }) {
   const bgColor = useColorModeValue('blackAlpha-600', 'whiteAlpha-400') // dark //white
 
   return (loading > 0
