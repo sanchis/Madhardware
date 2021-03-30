@@ -4,5 +4,6 @@ module.exports = {
     '^components(.*)$': '<rootDir>/components$1',
     '^pages(.*)$': '<rootDir>/pages$1'
   },
-  collectCoverage: true
+  collectCoverage: true,
+  setupFilesAfterEnv: ['<rootDir>/tests/setup.js']
 }
