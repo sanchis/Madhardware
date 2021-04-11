@@ -16,10 +16,10 @@ export default function SearchProduct ({ searchService, headerText, shopColor })
 
   return (
     <div>
-      <Heading data-testid='headerProduct' textAlign='center' mb='5'>{headerText}</Heading>
+      <Heading textAlign='center' mb='5'>{headerText}</Heading>
       {product === null
-        ? <Heading data-testid='productNotFound' textAlign='center' fontWeight='thin' fontSize='1xl'>Producto no encontrado 😔</Heading>
-        : <ProductCard data-testid='card' product={product} loading={loading} shopColor={shopColor} />}
+        ? <Heading textAlign='center' fontWeight='thin' fontSize='1xl'>Producto no encontrado 😔</Heading>
+        : <ProductCard product={product} loading={loading} shopColor={shopColor} />}
     </div>
   )
 }
