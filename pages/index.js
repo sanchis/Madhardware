@@ -18,13 +18,12 @@ export default function Home () {
       <Head>
         <title>Home - MadHardware</title>
       </Head>
-      <form onSubmit={handleSubmit} data-testid='searchForm'>
+      <form onSubmit={handleSubmit}>
         <FormControl>
 
           <Input
             type='text'
             lg='lg' name='keyword'
-            data-testid='searchInput'
             textAlign='center'
             placeholder='Introduce el nombre del producto'
             required onChange={(event) => setKeyword(event.target.value)}

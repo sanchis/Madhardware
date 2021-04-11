@@ -2,13 +2,15 @@ import SearchProduct from 'components/SearchProduct'
 import { render } from '../../utils'
 
 describe('SearchProduct component', () => {
+  const productNotFoundText = 'Producto no encontrado 😔'
+
   test('should be product not found', async () => {
     const fakePromise = () => new Promise((resolve, reject) => resolve(null))
     const headerText = 'test'
 
-    const { getByTestId, findByTestId } = render(<SearchProduct searchService={fakePromise} headerText={headerText} />)
-    const headerNotFound = await findByTestId('productNotFound')
-    const headerProduct = getByTestId('headerProduct')
+    const { getByText, findByText } = render(<SearchProduct searchService={fakePromise} headerText={headerText} />)
+    const headerNotFound = await findByText(productNotFoundText)
+    const headerProduct = getByText(headerText)
 
     expect(headerNotFound).toBeInTheDocument()
     expect(headerProduct).toBeInTheDocument()
@@ -25,8 +27,8 @@ describe('SearchProduct component', () => {
     }))
     const headerText = 'test'
 
-    const { getByTestId, findByTestId } = render(<SearchProduct searchService={fakePromise} headerText={headerText} />)
-    const headerProduct = getByTestId('headerProduct')
+    const { getByText, findByTestId } = render(<SearchProduct searchService={fakePromise} headerText={headerText} />)
+    const headerProduct = getByText(headerText)
     const cardProduct = await findByTestId('card')
 
     expect(headerProduct).toBeInTheDocument()
@@ -38,9 +40,9 @@ describe('SearchProduct component', () => {
     const fakePromise = () => new Promise((resolve, reject) => reject(new Error()))
     const headerText = 'test'
 
-    const { getByTestId, findByTestId } = render(<SearchProduct searchService={fakePromise} headerText={headerText} />)
-    const headerNotFound = await findByTestId('productNotFound')
-    const headerProduct = getByTestId('headerProduct')
+    const { getByText, findByText } = render(<SearchProduct searchService={fakePromise} headerText={headerText} />)
+    const headerNotFound = await findByText(productNotFoundText)
+    const headerProduct = getByText(headerText)
 
     expect(headerNotFound).toBeInTheDocument()
     expect(headerProduct).toBeInTheDocument()
