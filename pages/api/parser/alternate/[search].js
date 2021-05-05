@@ -1,10 +1,11 @@
 import nc from 'next-connect'
 import { searchProduct } from 'parser/alternate'
-import { ErrorHandler } from 'server/utils/error-handler'
+import { ErrorHandler } from 'server/middlewares/error-handler'
+import { CacheControl } from 'server/middlewares/cache-control'
 
 const handler = nc({
   onError: ErrorHandler
-})
+}).use(CacheControl({ seconds: 86400 }))
 
 handler.get((req, res) => {
   const { search } = req.query
