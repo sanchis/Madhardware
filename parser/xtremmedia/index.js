@@ -6,7 +6,7 @@ const BASE_URL = 'https://xtremmedia.com'
 const SEARCH_URL = (text) => `${BASE_URL}/?s=product/search/...%20introduce%20palabras%20para%20buscar%20en%20T%C3%ADtulos&term=${text}`
 
 export function searchProduct (text) {
-  return axios.get(SEARCH_URL(text), ConfigAxios)
+  return axios.get(SEARCH_URL(text), ConfigAxios({ referer: BASE_URL }))
     .then(res => res.data)
     .then(data => {
       if (data?.length > 0) {
@@ -22,7 +22,7 @@ function findByUrl (url) {
     return ProductNotFound()
   }
 
-  return axios.get(`${url}`, ConfigAxios)
+  return axios.get(`${url}`, ConfigAxios())
     .then(res => res.data)
     .then(data => populateData(data, url))
 }

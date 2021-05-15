@@ -6,7 +6,7 @@ const BASE_URL = 'https://www.coolmod.com'
 const SEARCH_URL = `${BASE_URL}/web/search/bar`
 
 export function searchProduct (text) {
-  return axios.post(SEARCH_URL, `search=${text}`, ConfigAxios)
+  return axios.post(SEARCH_URL, `search=${text}`, ConfigAxios({ referer: BASE_URL }))
     .then(res => res.data)
     .then(data => cheerio.load(data))
     .then(dom => {
@@ -24,19 +24,17 @@ function findByUrl (url) {
     return ProductNotFound()
   }
 
-  return axios.get(`${BASE_URL}${url}`, ConfigAxios)
+  return axios.get(`${BASE_URL}${url}`, ConfigAxios())
     .then(res => res.data)
     .then(data => populateData(data, BASE_URL + url))
 }
 
 function getDescription (idProduct) {
-  const newConfig = {
-    headers: {
-      ...ConfigAxios.headers,
-      'X-Requested-With': 'XMLHttpRequest'
-    }
+  const headers = {
+    'X-Requested-With': 'XMLHttpRequest'
   }
-  return axios.post(`${BASE_URL}/web/vista-productos/getDescription`, `id=${idProduct}&is_responsive=`, newConfig)
+
+  return axios.post(`${BASE_URL}/web/vista-productos/getDescription`, `id=${idProduct}&is_responsive=`, ConfigAxios({ headers }))
     .then(res => res.data || '')
     .then(res => {
       if (res !== '') {
