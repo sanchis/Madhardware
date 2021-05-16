@@ -3,14 +3,14 @@ import cheerio from 'cheerio'
 import { ConfigAxios, ProductNotFound } from '../config'
 
 const BASE_URL = 'https://www.pccomponentes.com'
-const SEARCH_URL = (text) => `${BASE_URL}/buscar/ajax?query=${text}&page=0`
+const SEARCH_URL = (text) => `${BASE_URL}/buscar/?query=${text}`
 
 export function searchProduct (text) {
-  return axios.post(SEARCH_URL(text), undefined, ConfigAxios)
+  return axios.get(SEARCH_URL(text), ConfigAxios({ referer: BASE_URL }))
     .then(res => res.data)
     .then(data => cheerio.load(data))
     .then(dom => {
-      const links = dom('.GTM-productClick')
+      const links = dom('a[data-list="search results"]')
       if (links?.length > 0) {
         return links.first().attr('href')
       }
@@ -24,7 +24,7 @@ function findByUrl (url) {
     return ProductNotFound()
   }
 
-  return axios.get(`${BASE_URL}${url}`, ConfigAxios)
+  return axios.get(`${url}`, ConfigAxios({ referer: BASE_URL }))
     .then(res => res.data)
     .then(populateData)
 }

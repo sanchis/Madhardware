@@ -8,10 +8,9 @@ const SEARCH_URL = `${BASE_URL}/mobile/listing.xhtml`
 export function searchProduct (text) {
   const data = `lazyForm=lazyForm&q=${encodeURI(text)}&lazyComponent=lazyListingContainer&javax.faces.ViewState=stateless&javax.faces.source=lazyButton&javax.faces.partial.event=click&javax.faces.partial.execute=lazyButton%20lazyButton&javax.faces.behavior.event=action&javax.faces.partial.ajax=true`
 
-  const newConfig = (cookie) => ({
+  const newConfig = (cookie) => ConfigAxios({
     withCredentials: true,
     headers: {
-      ...ConfigAxios.headers,
       Cookie: cookie,
       Accept: '*/*',
       Connection: 'keep-alive',
@@ -40,7 +39,7 @@ function findByUrl (url) {
     return ProductNotFound()
   }
 
-  return axios.get(`${url}`, ConfigAxios)
+  return axios.get(`${url}`, ConfigAxios())
     .then(res => res.data)
     .then(populateData)
 }

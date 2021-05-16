@@ -3,14 +3,23 @@ import cheerio from 'cheerio'
 import { ConfigAxios, ProductNotFound } from '../config'
 
 const BASE_URL = 'https://xtremmedia.com'
-const SEARCH_URL = (text) => `${BASE_URL}/?s=product/search/...%20introduce%20palabras%20para%20buscar%20en%20T%C3%ADtulos&term=${text}`
+const SEARCH_DATA = (text) => `mod=product&req=global_search_post&smartsile_seal=574e60d2c4b4ba1eae2f2a11206eab7da17e43e8ce56d89cddc98a9cbcb1e5e2&_validation_list=jdSRleQ5Co81NcVGRM4eCH1e1VaD0Q%3D%3D&_validation_seal=e4d9b6ce6d8f2b9849737d0729c353c69e5cbb1ce9452e05d10bea8867f3fa89&tsearch=${text}`
 
 export function searchProduct (text) {
-  return axios.get(SEARCH_URL(text), ConfigAxios)
+  const body = SEARCH_DATA(text)
+  const config = ConfigAxios({
+    headers: {
+      'content-length': body.length,
+      'content-type': 'application/x-www-form-urlencoded'
+    }
+  })
+  return axios.post(BASE_URL, body, config)
     .then(res => res.data)
+    .then(data => cheerio.load(data))
     .then(data => {
-      if (data?.length > 0) {
-        return data[0].url
+      const links = data('.article-list-titulo a')
+      if (links?.length > 0) {
+        return links.first().attr('href')
       }
       ProductNotFound()
     })
@@ -22,7 +31,7 @@ function findByUrl (url) {
     return ProductNotFound()
   }
 
-  return axios.get(`${url}`, ConfigAxios)
+  return axios.get(`${BASE_URL}${url.substr(1)}`, ConfigAxios())
     .then(res => res.data)
     .then(data => populateData(data, url))
 }
@@ -31,10 +40,10 @@ function populateData (html, url) {
   try {
     const page = cheerio.load(html)
 
-    const image = page('.producto-portada-imagen > img').attr('src')
-    const price = page('#producto-ficha-precio > strong').text().replace('€', '')
-    const description = page('#producto-ficha-datostecnicos').text()
-    const name = page('.producto-portada-titulo').text()
+    const image = page('.ficha-lupa a').first().attr('href')
+    const price = page('.precio').text().replace('€', '').trim()
+    const description = page('#datos-deta-ficha').text()
+    const name = page('[itemprop="name"]').text()
 
     return {
       price: parseFloat(price),
