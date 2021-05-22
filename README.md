@@ -39,5 +39,6 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 <a href="https://github.com/sanchis/madhardware/graphs/contributors" >
   <img src="https://contrib.rocks/image?repo=sanchis/madhardware"  />
 </a>
+[khushab](https://github.com/khushab)
 
 Made with [contributors-img](https://contrib.rocks).
