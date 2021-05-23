@@ -1,6 +1,7 @@
 import axios from 'axios'
 import cheerio from 'cheerio'
-import { ConfigAxios, ProductNotFound } from '../config'
+import { ConfigAxios } from '../config'
+import { ProductNotFoundError } from '../errors'
 
 const BASE_URL = 'https://www.pccomponentes.com'
 const SEARCH_URL = (text) => `${BASE_URL}/buscar/?query=${text}`
@@ -14,14 +15,14 @@ export function searchProduct (text) {
       if (links?.length > 0) {
         return links.first().attr('href')
       }
-      ProductNotFound()
+      throw new ProductNotFoundError()
     })
     .then(findByUrl)
 }
 
 function findByUrl (url) {
   if (!url || url === '') {
-    return ProductNotFound()
+    throw new ProductNotFoundError()
   }
 
   return axios.get(`${url}`, ConfigAxios({ referer: BASE_URL }))
@@ -30,25 +31,20 @@ function findByUrl (url) {
 }
 
 function populateData (html) {
-  try {
-    const page = cheerio.load(html)
+  const page = cheerio.load(html)
 
-    const product = page('#add-cart')
-    const name = product.attr('data-name')
-    const url = page('link[rel="canonical"]').attr('href')
-    const image = page('.image_url').text()
-    const price = product.attr('data-price')
-    const description = page('#ficha-producto-caracteristicas').text()
+  const product = page('#add-cart')
+  const name = product.attr('data-name')
+  const url = page('link[rel="canonical"]').attr('href')
+  const image = page('.image_url').text()
+  const price = product.attr('data-price')
+  const description = page('#ficha-producto-caracteristicas').text()
 
-    return {
-      price: parseFloat(price),
-      name: name,
-      url: url,
-      description,
-      image: image
-    }
-  } catch (error) {
-    console.error(error)
-    return ProductNotFound()
+  return {
+    price: parseFloat(price),
+    name: name,
+    url: url,
+    description,
+    image: image
   }
 }

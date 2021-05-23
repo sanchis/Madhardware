@@ -1,6 +1,7 @@
 import axios from 'axios'
 import cheerio from 'cheerio'
-import { ConfigAxios, ProductNotFound } from '../config'
+import { ConfigAxios } from '../config'
+import { ProductNotFoundError } from '../errors'
 
 const BASE_URL = 'https://xtremmedia.com'
 const SEARCH_DATA = (text) => `mod=product&req=global_search_post&smartsile_seal=574e60d2c4b4ba1eae2f2a11206eab7da17e43e8ce56d89cddc98a9cbcb1e5e2&_validation_list=jdSRleQ5Co81NcVGRM4eCH1e1VaD0Q%3D%3D&_validation_seal=e4d9b6ce6d8f2b9849737d0729c353c69e5cbb1ce9452e05d10bea8867f3fa89&tsearch=${text}`
@@ -21,14 +22,14 @@ export function searchProduct (text) {
       if (links?.length > 0) {
         return links.first().attr('href')
       }
-      ProductNotFound()
+      throw new ProductNotFoundError()
     })
     .then(findByUrl)
 }
 
 function findByUrl (url) {
   if (!url || url === '') {
-    return ProductNotFound()
+    throw new ProductNotFoundError()
   }
 
   return axios.get(`${BASE_URL}${url.substr(1)}`, ConfigAxios())
@@ -37,23 +38,18 @@ function findByUrl (url) {
 }
 
 function populateData (html, url) {
-  try {
-    const page = cheerio.load(html)
+  const page = cheerio.load(html)
 
-    const image = page('.ficha-lupa a').first().attr('href')
-    const price = page('.precio').text().replace('€', '').trim()
-    const description = page('#datos-deta-ficha').text()
-    const name = page('[itemprop="name"]').text()
+  const image = page('.ficha-lupa a').first().attr('href')
+  const price = page('.precio').text().replace('€', '').trim()
+  const description = page('#datos-deta-ficha').text()
+  const name = page('[itemprop="name"]').text()
 
-    return {
-      price: parseFloat(price),
-      name: name,
-      url: url,
-      description,
-      image: image
-    }
-  } catch (error) {
-    console.error(error)
-    return ProductNotFound()
+  return {
+    price: parseFloat(price),
+    name: name,
+    url: url,
+    description,
+    image: image
   }
 }
