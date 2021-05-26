@@ -1,7 +1,7 @@
 
 import { Box, Center, Heading, Image, Progress, SkeletonCircle, SkeletonText, Text, Tooltip } from '@chakra-ui/react'
 
-export default function ProductCard({ product, shopColor, loading = false }) {
+export default function ProductCard ({ product, shopColor, loading = false }) {
   const isLoading = () => !product || loading
   return (
     <Box data-testid='card' borderWidth='1px' borderColor={shopColor} borderRadius='lg' overflow='hidden'>
