@@ -5,7 +5,7 @@ import { ConfigAxios, ProductNotFound } from '../config'
 const BASE_URL = 'https://www.alternate.es'
 const SEARCH_URL = `${BASE_URL}/mobile/listing.xhtml`
 
-export function searchProduct (text) {
+export async function searchProduct (text) {
   const data = `lazyForm=lazyForm&q=${encodeURI(text)}&lazyComponent=lazyListingContainer&javax.faces.ViewState=stateless&javax.faces.source=lazyButton&javax.faces.partial.event=click&javax.faces.partial.execute=lazyButton%20lazyButton&javax.faces.behavior.event=action&javax.faces.partial.ajax=true`
 
   const newConfig = (cookie) => ConfigAxios({
@@ -20,8 +20,10 @@ export function searchProduct (text) {
   })
 
   const requestAlternate = (cookie) => axios.post(SEARCH_URL, data, newConfig(cookie))
-  return requestAlternate(null)
-    .then(data => data.headers['set-cookie'] ? requestAlternate(data.headers['set-cookie'].join(';')) : data)
+  const cookie = await requestAlternate(null)
+    .then(data => data.headers['set-cookie'].join(';'))
+
+  return requestAlternate(cookie)
     .then(res => res.data)
     .then(data => cheerio.load(data))
     .then(data => {
@@ -45,24 +47,22 @@ function findByUrl (url) {
 }
 
 function populateData (html) {
-  try {
-    const page = cheerio.load(html)
+  const page = cheerio.load(html)
 
-    const url = page('[rel="canonical"]').attr('href')
-    const image = page('[itemprop="image"]').attr('content')
-    const price = page('[itemprop="price"]').attr('content')
-    const description = page('[itemprop="description"]').text()
-    const name = page('#product-name-data').attr('data-product-name')
+  const url = page('[rel="canonical"]').attr('href')
+  const image = page('[itemprop="image"]').attr('content')
+  const price = page('[itemprop="price"]').attr('content')
+  const description = page('[itemprop="description"]').text()
+  const name = page('#product-name-data').attr('data-product-name')
+  const pnHeader = page('#product-details .c1').find(element => element.text() === 'Número de fabricante')
+  const pn = pnHeader.parent().children('.c4').text()
 
-    return {
-      price: parseFloat(price),
-      name: name,
-      url: url,
-      description,
-      image: image
-    }
-  } catch (error) {
-    console.error(error)
-    return ProductNotFound()
+  return {
+    pn,
+    price: parseFloat(price),
+    name: name,
+    url: url,
+    description,
+    image: image
   }
 }

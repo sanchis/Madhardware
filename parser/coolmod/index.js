@@ -47,25 +47,22 @@ function getDescription (idProduct) {
 }
 
 async function populateData (html, url) {
-  try {
-    const page = cheerio.load(html)
+  const page = cheerio.load(html)
 
-    const productId = page('[name="virtuemart_product_id"]').attr('value')
-    const price = page('#fixed-footer-price').text()
-      .replace('€', '')
-    const name = page('title').text()
-    const description = await getDescription(productId)
-    const image = page('#_image2').attr('data-src')
+  const productId = page('[name="virtuemart_product_id"]').attr('value')
+  const price = page('#fixed-footer-price').text()
+    .replace('€', '')
+  const name = page('title').text()
+  const description = await getDescription(productId)
+  const image = page('#_image2').attr('data-src')
+  const pn = page('.text-pn').attr('title')
 
-    return {
-      price: parseFloat(price),
-      name: name,
-      url: url,
-      description,
-      image: image
-    }
-  } catch (error) {
-    console.error(error)
-    return ProductNotFound()
+  return {
+    pn,
+    price: parseFloat(price),
+    name: name,
+    url: url,
+    description,
+    image: image
   }
 }

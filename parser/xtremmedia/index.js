@@ -30,30 +30,27 @@ function findByUrl (url) {
   if (!url || url === '') {
     return ProductNotFound()
   }
-
-  return axios.get(`${BASE_URL}${url.substr(1)}`, ConfigAxios())
+  url = `${BASE_URL}${url.substr(1)}`
+  return axios.get(url, ConfigAxios())
     .then(res => res.data)
     .then(data => populateData(data, url))
 }
 
 function populateData (html, url) {
-  try {
-    const page = cheerio.load(html)
+  const page = cheerio.load(html)
 
-    const image = page('.ficha-lupa a').first().attr('href')
-    const price = page('.precio').text().replace('€', '').trim()
-    const description = page('#datos-deta-ficha').text()
-    const name = page('[itemprop="name"]').text()
+  const image = page('.ficha-lupa a').first().attr('href')
+  const price = page('[itemprop="price"]').attr('content')
+  const description = page('#datos-deta-ficha').text()
+  const name = page('[itemprop="name"]').text()
+  const pn = page('.identifier').text().split(':')[1] || null
 
-    return {
-      price: parseFloat(price),
-      name: name,
-      url: url,
-      description,
-      image: image
-    }
-  } catch (error) {
-    console.error(error)
-    return ProductNotFound()
+  return {
+    pn: pn.trim(),
+    price: parseFloat(price),
+    name: name,
+    url: url,
+    description,
+    image: image
   }
 }
