@@ -4,10 +4,13 @@ function getDb () {
   return db.from('product')
 }
 
-export function insertProduct (values) {
-  return getDb().upsert(values)
+export function upsertProduct ({ pn, name }) {
+  return getDb().upsert({
+    id: pn,
+    name: name
+  })
 }
 
-export function updateProduct (values) {
-  return getDb().update(values)
-}
+// export function updateProduct (values) {
+//   return getDb().update(values)
+// }

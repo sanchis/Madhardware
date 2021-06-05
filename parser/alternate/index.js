@@ -70,6 +70,6 @@ function populateData (html) {
     name: name,
     url: url,
     description,
-    image: image
+    img: image
   }
 }

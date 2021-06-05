@@ -52,6 +52,6 @@ function populateData (html, url) {
     name: name,
     url: url,
     description,
-    image: image
+    img: image
   }
 }

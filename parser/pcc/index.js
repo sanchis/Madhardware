@@ -1,5 +1,6 @@
 import axios from 'axios'
 import cheerio from 'cheerio'
+import { upsertProductShop } from 'server/db/product-shop'
 import { ConfigAxios } from '../config'
 import { ProductNotFoundError } from '../errors'
 
@@ -40,13 +41,15 @@ function populateData (html) {
   const price = product.attr('data-price')
   const description = page('#ficha-producto-caracteristicas').text()
   const pn = page('#codigo-articulo-pc').parent().children('span').attr('content')
-
-  return {
+  const data = {
     pn,
     price: parseFloat(price),
     name: name,
     url: url,
     description,
-    image: image
+    img: image,
+    shop: 'Pccomponentes' // TODO maybe good point to create a enum
   }
+  upsertProductShop(data)
+  return data
 }
