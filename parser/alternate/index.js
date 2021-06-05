@@ -1,6 +1,7 @@
 import axios from 'axios'
 import cheerio from 'cheerio'
-import { ConfigAxios, ProductNotFound } from '../config'
+import { ConfigAxios } from '../config'
+import { ProductNotFoundError } from '../errors'
 
 const BASE_URL = 'https://www.alternate.es'
 const SEARCH_URL = `${BASE_URL}/mobile/listing.xhtml`
@@ -29,14 +30,14 @@ export function searchProduct (text) {
       if (links?.length > 0) {
         return links.first().attr('href')
       }
-      ProductNotFound()
+      throw new ProductNotFoundError()
     })
     .then(findByUrl)
 }
 
 function findByUrl (url) {
   if (!url || url === '') {
-    return ProductNotFound()
+    throw new ProductNotFoundError()
   }
 
   return axios.get(`${url}`, ConfigAxios())
@@ -62,7 +63,7 @@ function populateData (html) {
       image: image
     }
   } catch (error) {
-    console.error(error)
-    return ProductNotFound()
+    // console.error(error)
+    throw new ProductNotFoundError()
   }
 }

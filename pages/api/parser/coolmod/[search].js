@@ -11,10 +11,6 @@ handler.get((req, res) => {
 
   return searchProduct(search)
     .then(res.json)
-    .catch(err => {
-      console.error(`Coolmod search - ${search}`, err)
-      res.status(404).json({ error: 'Producto no encontrado' })
-    })
 })
 
 export default handler

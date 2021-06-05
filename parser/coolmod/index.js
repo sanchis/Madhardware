@@ -1,6 +1,7 @@
 import axios from 'axios'
-import { ConfigAxios, ProductNotFound } from '../config'
+import { ConfigAxios } from '../config'
 import cheerio from 'cheerio'
+import { ProductNotFoundError } from '../errors'
 
 const BASE_URL = 'https://www.coolmod.com'
 const SEARCH_URL = `${BASE_URL}/web/search/bar`
@@ -14,14 +15,14 @@ export function searchProduct (text) {
       if (links?.length > 0) {
         return links.first().attr('data-url')
       }
-      ProductNotFound()
+      throw new ProductNotFoundError()
     })
     .then(findByUrl)
 }
 
 function findByUrl (url) {
   if (!url || url === '') {
-    return ProductNotFound()
+    throw new ProductNotFoundError()
   }
 
   return axios.get(`${BASE_URL}${url}`, ConfigAxios())
@@ -47,25 +48,20 @@ function getDescription (idProduct) {
 }
 
 async function populateData (html, url) {
-  try {
-    const page = cheerio.load(html)
+  const page = cheerio.load(html)
 
-    const productId = page('[name="virtuemart_product_id"]').attr('value')
-    const price = page('#fixed-footer-price').text()
-      .replace('€', '')
-    const name = page('title').text()
-    const description = await getDescription(productId)
-    const image = page('#_image2').attr('data-src')
+  const productId = page('[name="virtuemart_product_id"]').attr('value')
+  const price = page('#fixed-footer-price').text()
+    .replace('€', '')
+  const name = page('title').text()
+  const description = await getDescription(productId)
+  const image = page('#_image2').attr('data-src')
 
-    return {
-      price: parseFloat(price),
-      name: name,
-      url: url,
-      description,
-      image: image
-    }
-  } catch (error) {
-    console.error(error)
-    return ProductNotFound()
+  return {
+    price: parseFloat(price),
+    name: name,
+    url: url,
+    description,
+    image: image
   }
 }
