@@ -19,7 +19,7 @@ describe('Product Card component', () => {
       name: 'Test name',
       url: '',
       description: '',
-      image: 'https://via.placeholder.com/150'
+      img: 'https://via.placeholder.com/150'
     }
     const { getByLabelText, queryByLabelText } = render(<ProductCard shopColor='#fff' product={product} />)
 
@@ -31,7 +31,7 @@ describe('Product Card component', () => {
 
     expect(loadingProgress).toBeNull()
     expect(productHeader.innerHTML).toBe(product.name)
-    expect(productImage.getAttribute('data-src')).toBe(product.image)
+    expect(productImage.getAttribute('data-src')).toBe(product.img)
     expect(productDescription.innerHTML).toBe(product.description)
     expect(productPrice.innerHTML).toBe(`${product.price} €`)
   })
