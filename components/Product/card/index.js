@@ -8,7 +8,7 @@ export default function ProductCard ({ product, shopColor, loading = false }) {
       {isLoading() ? <Progress aria-label='loading-progress' size='xs' isIndeterminate colorScheme='orange' /> : null}
       <Center>
         <SkeletonCircle aria-label='loading' width='300px' height='300px' colorScheme='blue' isLoaded={!isLoading()}>
-          <Image aria-label='product-image' maxW='300' mt='3' data-src={product?.image} borderRadius='lg' src={product?.image} alt={product?.name} />
+          <Image aria-label='product-image' boxSize='300px' objectFit='contain' maxW='300' mt='3' data-src={product?.image} borderRadius='lg' src={product?.image} alt={product?.name} />
         </SkeletonCircle>
       </Center>
 

@@ -7,7 +7,3 @@ export const ConfigAxios = ({ ...extraConfig }) => {
   }
   return config
 }
-
-export function ProductNotFound () {
-  throw new Error('Producto no encontrado')
-};
