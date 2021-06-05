@@ -31,8 +31,8 @@ function findByUrl (url) {
   if (!url || url === '') {
     throw new ProductNotFoundError()
   }
-
-  return axios.get(`${BASE_URL}${url.substr(1)}`, ConfigAxios())
+  url = `${BASE_URL}${url.substr(1)}`
+  return axios.get(url, ConfigAxios())
     .then(res => res.data)
     .then(data => populateData(data, url))
 }
