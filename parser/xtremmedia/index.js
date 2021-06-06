@@ -41,15 +41,17 @@ function populateData (html, url) {
   const page = cheerio.load(html)
 
   const image = page('.ficha-lupa a').first().attr('href')
-  const price = page('.precio').text().replace('€', '').trim()
+  const price = page('[itemprop="price"]').attr('content')
   const description = page('#datos-deta-ficha').text()
   const name = page('[itemprop="name"]').text()
+  const pn = page('.identifier').text().split(':')[1] || null
 
   return {
+    pn: pn.trim(),
     price: parseFloat(price),
     name: name,
     url: url,
     description,
-    image: image
+    img: image
   }
 }

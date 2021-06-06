@@ -5,18 +5,19 @@
   "repository": "https://github.com/sanchis/madhardware",
   "scripts": {
     "dev": "next dev",
-    "debug": "cross-env NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "lint": "standard",
     "lint:fix": "standard --fix",
     "test": "jest",
     "test:dev": "jest --watchAll",
-    "start": "next start"
+    "start": "next start",
+    "migration": "env-cmd npx prisma migrate dev --name init"
   },
   "dependencies": {
     "@chakra-ui/react": "1.6.2",
     "@emotion/react": "11.4.0",
     "@emotion/styled": "11.3.0",
+    "@prisma/client": "^2.24.1",
     "axios": "0.21.1",
     "cheerio": "1.0.0-rc.9",
     "framer-motion": "4.1.17",
@@ -29,9 +30,10 @@
     "@testing-library/jest-dom": "5.12.0",
     "@testing-library/react": "11.2.7",
     "babel-jest": "26.6.3",
-    "cross-env": "7.0.3",
+    "env-cmd": "10.1.0",
     "husky": "4.3.8",
     "jest": "26.6.3",
+    "prisma": "^2.24.1",
     "lint-staged": "10.5.4",
     "standard": "16.0.3"
   },

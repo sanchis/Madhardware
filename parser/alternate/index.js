@@ -61,12 +61,15 @@ function populateData (html) {
   const price = page('[itemprop="price"]').attr('content')
   const description = page('[itemprop="description"]').text()
   const name = page('#product-name-data').attr('data-product-name')
+  const pnHeader = page('#product-details .c1').find(element => element.text() === 'Número de fabricante')
+  const pn = pnHeader.parent().children('.c4').text()
 
   return {
+    pn,
     price: parseFloat(price),
     name: name,
     url: url,
     description,
-    image: image
+    img: image
   }
 }

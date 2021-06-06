@@ -56,12 +56,14 @@ async function populateData (html, url) {
   const name = page('title').text()
   const description = await getDescription(productId)
   const image = page('#_image2').attr('data-src')
+  const pn = page('.text-pn').attr('title')
 
   return {
+    pn,
     price: parseFloat(price),
     name: name,
     url: url,
     description,
-    image: image
+    img: image
   }
 }
